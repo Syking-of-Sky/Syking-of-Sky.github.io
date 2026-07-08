@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Syking of Sky 的个人主页：制程工艺工程师、摄影师、AI 工作流实践者，可接小型 Demo 软件、网页与自动化程序定制。" />
+  <title>Syking of Sky | Engineer, Photographer, AI Builder</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b10;
+      --panel: rgba(255, 255, 255, 0.075);
+      --panel-strong: rgba(255, 255, 255, 0.12);
+      --text: #f5f7fb;
+      --muted: #a9b3c7;
+      --line: rgba(255, 255, 255, 0.14);
+      --cyan: #66e6ff;
+      --pink: #ff7ac8;
+      --green: #8cffc7;
+      --gold: #ffd27a;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(102, 230, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 86% 18%, rgba(255, 122, 200, 0.16), transparent 32%),
+        linear-gradient(135deg, #080b10 0%, #101521 48%, #070910 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 72%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+      position: relative;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(102, 230, 255, 0.22), rgba(255, 122, 200, 0.16));
+      box-shadow: 0 0 26px rgba(102, 230, 255, 0.12);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+      gap: 32px;
+      align-items: center;
+      padding: 56px 0 72px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      color: var(--green);
+      border: 1px solid rgba(140, 255, 199, 0.24);
+      border-radius: 999px;
+      background: rgba(140, 255, 199, 0.08);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 20px 0 16px;
+      font-size: clamp(48px, 9vw, 108px);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 650px;
+      margin: 0;
+      color: #d8deeb;
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.62;
+    }
+
+    .lead strong {
+      color: var(--text);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-size: 15px;
+      font-weight: 700;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.primary {
+      color: #061016;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      box-shadow: 0 18px 42px rgba(102, 230, 255, 0.18);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .profile-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.055));
+      box-shadow: var(--shadow);
+      padding: 24px;
+      backdrop-filter: blur(22px);
+    }
+
+    .portrait {
+      position: relative;
+      min-height: 310px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(135deg, rgba(102, 230, 255, 0.2), rgba(255, 122, 200, 0.14)),
+        linear-gradient(145deg, #161e2c, #0a0d13);
+    }
+
+    .portrait::before {
+      content: "AI";
+      position: absolute;
+      right: 18px;
+      top: 8px;
+      font-size: 110px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.06);
+    }
+
+    .portrait-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.5;
+    }
+
+    .orbit {
+      position: absolute;
+      inset: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      transform: rotate(-12deg);
+    }
+
+    .lens {
+      position: absolute;
+      left: 32px;
+      bottom: 32px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background:
+        radial-gradient(circle at 42% 36%, rgba(255, 255, 255, 0.92), transparent 7%),
+        radial-gradient(circle at 50% 50%, rgba(102, 230, 255, 0.42), rgba(255, 122, 200, 0.15) 42%, rgba(0, 0, 0, 0.36) 68%),
+        #101620;
+      box-shadow: inset 0 0 44px rgba(0, 0, 0, 0.42), 0 22px 50px rgba(0, 0, 0, 0.28);
+    }
+
+    .status-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.065);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status-item strong {
+      color: var(--text);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .section {
+      padding: 30px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      color: #dce4f3;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 220px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--panel);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .card .mini {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.09);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .commission {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 16px;
+      align-items: stretch;
+      border: 1px solid rgba(102, 230, 255, 0.24);
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(102, 230, 255, 0.12), rgba(255, 122, 200, 0.09)),
+        rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .commission-main {
+      padding: 10px;
+    }
+
+    .commission-main h2 {
+      margin-bottom: 14px;
+    }
+
+    .commission-main p {
+      margin: 0;
+      color: #d9e0ef;
+      line-height: 1.78;
+      font-size: 17px;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .service {
+      display: flex;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(8, 11, 16, 0.34);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .service span {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(102, 230, 255, 0.14);
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .service strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .service small {
+      display: block;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 13px;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .contact p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 32px 0 12px;
+      color: rgba(255, 255, 255, 0.52);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        width: min(100% - 22px, 720px);
+        padding-top: 18px;
+      }
+
+      .nav {
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding: 36px 0 48px;
+      }
+
+      .profile-card {
+        padding: 16px;
+      }
+
+      .portrait {
+        min-height: 240px;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .grid,
+      .commission {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-actions,
+      .contact {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .status-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .status-item strong {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="回到首页">
+        <span class="brand-mark">S</span>
+        <span>Syking of Sky</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">关于</a>
+        <a href="#work">方向</a>
+        <a href="#commission">接单</a>
+        <a href="#contact">联系</a>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="hero" aria-label="个人介绍">
+        <div>
+          <span class="eyebrow">Process Engineer / Photographer / AI Builder</span>
+          <h1>Syking of Sky</h1>
+          <p class="lead">
+            某科技公司制程工艺工程师，摄影师，也在把 <strong>AI 当作外置大脑</strong> 使用。
+            我关注制造现场、影像表达、效率工具和二次元文化，也接一些小型 Demo 软件与程序定制。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/Syking-of-Sky/Syking-of-Sky.github.io/issues">联系我</a>
+            <a class="button secondary" href="#commission">看看能做什么</a>
+          </div>
+        </div>
+
+        <aside class="profile-card" aria-label="个人状态卡片">
+          <div class="portrait" aria-hidden="true">
+            <div class="portrait-grid"></div>
+            <div class="orbit"></div>
+            <div class="lens"></div>
+          </div>
+          <div class="status-list">
+            <div class="status-item"><span>当前身份</span><strong>制程工艺工程师</strong></div>
+            <div class="status-item"><span>长期兴趣</span><strong>摄影 / AI / 二次元</strong></div>
+            <div class="status-item"><span>可合作</span><strong>小型软件 Demo 定制</strong></div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about" class="section">
+        <div class="section-head">
+          <h2>把现实问题做成可运行的小工具。</h2>
+          <p class="section-note">
+            我喜欢把工程里的判断、摄影里的观察、AI 里的自动化能力组合起来，
+            做一些能马上提高效率的小程序、小网页和流程 Demo。
+          </p>
+        </div>
+        <div class="tag-grid" aria-label="个人标签">
+          <span class="tag">制程工艺</span>
+          <span class="tag">制造现场</span>
+          <span class="tag">摄影师</span>
+          <span class="tag">AI 工作流</span>
+          <span class="tag">效率工具</span>
+          <span class="tag">小程序 Demo</span>
+          <span class="tag">二次元</span>
+          <span class="tag">长期学习</span>
+        </div>
+      </section>
+
+      <section id="work" class="section">
+        <div class="section-head">
+          <h2>我关注的方向</h2>
+          <p class="section-note">技术不是只摆在简历里的词，它应该能变成更顺手的工作方式。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="mini">ENGINEERING</span>
+            <h3>制程与现场问题</h3>
+            <p>关注流程、参数、异常和复盘，把复杂问题拆成可以观察、记录和改进的步骤。</p>
+          </article>
+          <article class="card">
+            <span class="mini">PHOTOGRAPHY</span>
+            <h3>摄影与影像表达</h3>
+            <p>用镜头记录城市、人物和生活切片。画面要有秩序，也要有一点情绪。</p>
+          </article>
+          <article class="card">
+            <span class="mini">AI WORKFLOW</span>
+            <h3>AI 代替大脑</h3>
+            <p>把 AI 当作第二工作台，用来整理资料、辅助写作、生成原型、联动工具和自动化流程。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="commission" class="section">
+        <div class="commission">
+          <div class="commission-main">
+            <span class="eyebrow">可接小单</span>
+            <h2>小型 Demo 软件、网页和自动化程序。</h2>
+            <p>
+              如果你有一个想法，需要先做出能看的原型、能跑的流程、能演示的小工具，
+              可以联系我聊聊。适合轻量需求、个人项目、课程作业 Demo、内部流程验证和小型网页展示。
+            </p>
+          </div>
+          <div class="service-list">
+            <div class="service">
+              <span>01</span>
+              <div>
+                <strong>网页 / H5 展示页</strong>
+                <small>个人主页、作品展示、活动页、产品介绍页、简单后台界面。</small>
+              </div>
+            </div>
+            <div class="service">
+              <span>02</span>
+              <div>
+                <strong>小型 Demo 程序</strong>
+                <small>把想法做成可点击、可演示、可部署的轻量版本。</small>
+              </div>
+            </div>
+            <div class="service">
+              <span>03</span>
+              <div>
+                <strong>AI / 自动化工具</strong>
+                <small>文本整理、批量处理、浏览器辅助、简单数据流和个人效率工具。</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="contact">
+          <div>
+            <h2>有想法，可以先发邮件。</h2>
+            <p>请简单说明你想做什么、希望在哪个平台运行、有没有参考页面或截图。</p>
+          </div>
+          <a class="button primary" href="https://github.com/Syking-of-Sky/Syking-of-Sky.github.io/issues">GitHub Issues</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Syking of Sky. Built with curiosity, camera light, and AI workflows.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
